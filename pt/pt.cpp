@@ -9,6 +9,7 @@
 #include "common/utils.hpp"
 #include "tiny_obj_loader.h"
 
+
 bool IntersectionTest()
 {
     return false;
@@ -45,7 +46,12 @@ void LoadModel(const char* objFilePath, const char* mtlFilePath)
         for (size_t f = 0; f < shapes[s].mesh.num_face_vertices.size(); f++)
         {
             size_t fv = size_t(shapes[s].mesh.num_face_vertices[f]);
+            std::vector<Vertex> vertices;
 
+            for (size_t v = 0; v < fv; v++)
+            {
+                tinyobj::index_t idx = shapes[s].mesh.indices[idxOffset + v];
+            }
         }
     }
 }
