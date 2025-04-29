@@ -29,8 +29,7 @@ typedef struct Ray
 typedef struct Triangle
 {
     Vertex v0, v1, v2;
+    int matIdx;
 } Triangle;
-
-
 
 #endif
