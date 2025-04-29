@@ -67,12 +67,6 @@ void LoadModel(const char *objFilePath, const char *mtlFilePath)
             vbuf.clear();
         }
     }
-
-    std::cout << "Total Triangle count = " << g_TriList.size() << std::endl;
-    for(int i = 0; i < g_TriList.size(); i++)
-    {
-        std::cout << g_TriList[i].matIdx << std::endl;
-    }
 }
 
 int main()
@@ -91,8 +85,18 @@ int main()
 
     // load mesh by using loadModelFunction in utils.hpp
     LoadModel("../../../assets/cornell_box.obj", "../../../assets/");
+    std::clog << "[SYSTEM] Triangle list size = " << g_TriList.size() << std::endl;
 
+    // generate ppm file 
 
+#pragma omp parallel for schedule(dynamic)
+    for (uint32_t y = 0; y < imgHeight; y++)
+    {
+        for (uint32_t x = 0; x < imgWidth; x++)
+        {
+
+        }
+    }
 
     return 0;
 }
