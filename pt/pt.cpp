@@ -8,6 +8,7 @@
 #include "common/structs.hpp"
 #include "common/utils.hpp"
 #include "tiny_obj_loader.h"
+#include "glm/glm.hpp"
 
 std::vector<Triangle> g_TriList;
 
@@ -88,15 +89,7 @@ int main()
     std::clog << "[SYSTEM] Triangle list size = " << g_TriList.size() << std::endl;
 
     // generate ppm file 
-
-#pragma omp parallel for schedule(dynamic)
-    for (uint32_t y = 0; y < imgHeight; y++)
-    {
-        for (uint32_t x = 0; x < imgWidth; x++)
-        {
-
-        }
-    }
-
+    glm::vec3 test = glm::vec3(0.0);
+    
     return 0;
 }
