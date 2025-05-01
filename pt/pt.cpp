@@ -1,21 +1,25 @@
 // Path Tracing
-
 #include <iostream>
 #include <algorithm>
 #include <cmath>
 #include <string>
+#include <random>
 
-#include "common/structs.hpp"
-#include "common/utils.hpp"
+// for random 
+static std::uniform_real_distribution<float> distribution(0.0, 1.0);
+static std::mt19937 generator;
+
+inline float Get1D() { return distribution(generator); }
+inline float Get1D(float min, float max) { return min + (max - min) * Get1D(); }
+
+// for geometry and mesh data
 #include "tiny_obj_loader.h"
 #include "glm/glm.hpp"
 
+using Vertex = glm::vec3; using Vector3 = glm::vec3; using Point3 = glm::vec3;
+typedef struct Camera { Point3 position; Vector3 direction; Vector3 up; float focalLength;  } Camera;
+typedef struct Triangle { Vertex v[3]; int matIdx; } Triangle;
 std::vector<Triangle> g_TriList;
-
-bool TriangleIntersectionTest()
-{
-    return false;
-}
 
 void LoadModel(const char *objFilePath, const char *mtlFilePath)
 {
@@ -68,6 +72,8 @@ void LoadModel(const char *objFilePath, const char *mtlFilePath)
             vbuf.clear();
         }
     }
+
+
 }
 
 int main()
@@ -87,9 +93,5 @@ int main()
     // load mesh by using loadModelFunction in utils.hpp
     LoadModel("../../../assets/cornell_box.obj", "../../../assets/");
     std::clog << "[SYSTEM] Triangle list size = " << g_TriList.size() << std::endl;
-
-    // generate ppm file 
-    glm::vec3 test = glm::vec3(0.0);
-    
     return 0;
 }
